@@ -90,3 +90,4 @@ npm run dev
 
 - 如果遇到跨域问题 (CORS)，请确保后端 `app/__init__.py` 中已正确配置 `CORS(app)`。
 - 生产环境部署请使用 Gunicorn (Linux) 或 Waitress (Windows) 作为 WSGI 服务器，并构建前端静态资源 (`npm run build`)。
+- 未进行单元测试和功能测试，代码有漏洞
