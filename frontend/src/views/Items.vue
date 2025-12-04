@@ -19,7 +19,7 @@
           <label>单位</label>
           <input v-model="form.unit" placeholder="pcs" />
         </div>
-        <button type="submit">添加</button>
+        <button type="submit" style="height: 34px; padding: 0 20px; align-self: flex-end;">添加</button>
       </form>
     </div>
 

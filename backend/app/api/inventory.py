@@ -107,7 +107,7 @@ def list_inventory_records():
             "warehouse_name": r.warehouse.name,
             "quantity": r.quantity,
             "type": r.type,
-            "remark": r.remark,
+            "remarks": r.remarks,
             "created_at": r.created_at.isoformat()
         }
         for r in records

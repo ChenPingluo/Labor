@@ -24,5 +24,5 @@ def create_item():
         }), 400
     item = Item(sku=sku, name=name, unit=payload.get("unit", "pcs"))
     db.session.add(item)
-    db.seaasion.commit()
+    db.session.commit()
     return jsonify({"data": {"id": item.id}, "error": None}), 201

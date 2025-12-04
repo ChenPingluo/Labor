@@ -25,7 +25,7 @@
           </select>
         </div>
 
-        <button @click="loadStock">查询</button>
+        <button @click="loadStock" style="height: 34px; padding: 0 20px; align-self: flex-end;">查询</button>
       </div>
     </div>
 

@@ -42,7 +42,7 @@
             <label>备注</label>
             <input v-model="form.remark" type="text" placeholder="可选备注" />
           </div>
-          <button type="submit">保存记录</button>
+          <button type="submit" style="height: 34px; padding: 0 20px; align-self: flex-end;">保存记录</button>
         </div>
       </form>
     </div>

@@ -25,7 +25,7 @@
           <input v-model="form.remark" placeholder="说明..." />
         </div>
 
-        <button type="submit">新增</button>
+        <button type="submit" style="height: 34px; padding: 0 20px; align-self: flex-end;">新增</button>
       </form>
     </div>
 
