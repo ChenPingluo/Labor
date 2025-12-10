@@ -57,3 +57,37 @@ def list_finance_records():
     ]
 
     return jsonify({"data": data, "error": None})
+
+
+@api_v1.route("/finance/inventory-value", methods=["GET"])
+@jwt_required()
+def get_inventory_value():
+    try:
+        from labor_core import calculate_total_value
+    except ImportError:
+        return jsonify({"error": "Rust module 'labor_core' not found. Please compile it first.", "data": None}), 500
+
+    from ..models.inventory_record import InventoryRecord
+    
+    records = InventoryRecord.query.all()
+    
+    # Mock price logic: price = item_id * 10.0 + 5.0
+    items_for_rust = []
+    for r in records:
+        items_for_rust.append(
+            (float(r.item_id * 10.0 + 5.0), r.quantity)
+        )
+        
+    try:
+        total_value = calculate_total_value(items_for_rust)
+    except Exception as e:
+        return jsonify({"error": str(e), "data": None}), 500
+        
+    return jsonify({
+        "data": {
+            "total_value": total_value,
+            "item_count": len(items_for_rust),
+            "engine": "Rust"
+        },
+        "error": None
+    })

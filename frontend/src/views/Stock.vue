@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h2>库存总览</h2>
+    <h2>{{ $t('stock.title') }}</h2>
 
     <div class="card">
-      <h3>查询筛选</h3>
+      <h3>{{ $t('stock.filter') }}</h3>
       <div class="flex gap-4 items-end">
         <div style="flex: 1;">
-          <label>商品</label>
+          <label>{{ $t('common.item') }}</label>
           <select v-model="filters.item_id">
-            <option value="">全部商品</option>
+            <option value="">{{ $t('stock.allItems') }}</option>
             <option v-for="i in items" :key="i.id" :value="i.id">
               {{ i.sku }} - {{ i.name }}
             </option>
@@ -16,29 +16,29 @@
         </div>
 
         <div style="flex: 1;">
-          <label>仓库</label>
+          <label>{{ $t('common.warehouse') }}</label>
           <select v-model="filters.warehouse_id">
-            <option value="">全部仓库</option>
+            <option value="">{{ $t('stock.allWarehouses') }}</option>
             <option v-for="w in warehouses" :key="w.id" :value="w.id">
               {{ w.name }}
             </option>
           </select>
         </div>
 
-        <button @click="loadStock" style="height: 34px; padding: 0 20px; align-self: flex-end;">查询</button>
+        <button @click="loadStock" style="height: 34px; padding: 0 20px; align-self: flex-end;">{{ $t('common.query') }}</button>
       </div>
     </div>
 
     <div class="card">
-      <h3>库存结果</h3>
+      <h3>{{ $t('stock.result') }}</h3>
       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>商品</th>
-              <th>SKU</th>
-              <th>仓库</th>
-              <th>当前库存</th>
+              <th>{{ $t('common.item') }}</th>
+              <th>{{ $t('items.sku') }}</th>
+              <th>{{ $t('common.warehouse') }}</th>
+              <th>{{ $t('stock.currentStock') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -49,7 +49,7 @@
               <td style="font-weight: bold;">{{ row.stock }}</td>
             </tr>
             <tr v-if="stock.length === 0">
-              <td colspan="4" style="text-align: center; color: #999;">暂无数据</td>
+              <td colspan="4" style="text-align: center; color: #999;">{{ $t('common.noData') }}</td>
             </tr>
           </tbody>
         </table>

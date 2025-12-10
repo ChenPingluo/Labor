@@ -1,20 +1,20 @@
 <template>
   <div class="login-container">
     <div class="login-card">
-      <h2 class="login-title">系统登录</h2>
+      <h2 class="login-title">{{ $t('login.title') }}</h2>
 
       <form @submit.prevent="handleLogin">
         <div class="form-group">
-          <label>用户名</label>
-          <input v-model="form.username" placeholder="请输入用户名" required />
+          <label>{{ $t('common.username') }}</label>
+          <input v-model="form.username" :placeholder="$t('login.usernamePlaceholder')" required />
         </div>
         
         <div class="form-group">
-          <label>密码</label>
-          <input v-model="form.password" type="password" placeholder="请输入密码" required />
+          <label>{{ $t('common.password') }}</label>
+          <input v-model="form.password" type="password" :placeholder="$t('login.passwordPlaceholder')" required />
         </div>
 
-        <button type="submit" class="w-full" style="margin-top: 16px;">登录</button>
+        <button type="submit" class="w-full" style="margin-top: 16px;">{{ $t('login.loginButton') }}</button>
       </form>
     </div>
   </div>
@@ -24,8 +24,10 @@
 import { ref } from 'vue'
 import { login } from '../api/auth'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
+const { t } = useI18n()
 
 const form = ref({
   username: '',
@@ -43,7 +45,7 @@ const handleLogin = async () => {
     localStorage.setItem('user', JSON.stringify(res.data.user))
     router.push('/')
   } catch (e) {
-    alert('登录失败，请检查网络或联系管理员')
+    alert(t('login.loginFailed'))
   }
 }
 </script>

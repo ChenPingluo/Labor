@@ -6,12 +6,13 @@
 
 - `backend/`: Flask 后端代码
 - `frontend/`: Vue 3 + Vite 前端代码
+- `labor_core/`: Rust 高性能计算核心模块
 
 ## 快速开始
 
-### 1. 后端环境配置 (Backend)
+### 1. 后端环境配置 (Backend & Rust Core)
 
-确保你已经安装了 Python 3.8+。
+确保你已经安装了 Python 3.8+ 和 Rust 工具链 (Cargo)。
 
 ```bash
 # 1. 进入后端目录
@@ -25,18 +26,24 @@ python -m venv venv
 # Linux/Mac 激活虚拟环境
 source venv/bin/activate
 
-# 3. 安装依赖
+# 3. 安装依赖 (包含 maturin)
 pip install -r requirements.txt
 
-# 4. 数据库迁移
+# 4. 编译并安装 Rust 核心模块
+# 注意：必须在激活虚拟环境的状态下执行
+cd ../labor_core
+maturin develop
+cd ../backend
+
+# 5. 数据库迁移
 # 初始化数据库表结构
 flask db upgrade
 
-# 5. 创建管理员账号
+# 6. 创建管理员账号
 # 默认账号: admin / 密码: admin
 python create_admin.py
 
-# 6. 启动后端服务
+# 7. 启动后端服务
 # Windows PowerShell
 $env:FLASK_APP="app"
 $env:FLASK_ENV="development"
@@ -79,11 +86,13 @@ npm run dev
    - **用户名**: `admin`
    - **密码**: `admin`
 3. 登录后即可进行商品管理、仓库管理、库存流水记录及财务管理等操作。
+4. **多语言支持**：系统支持中文和英文切换，可在页面右上角进行设置。
 
 ## 技术栈
 
 - **后端**: Python, Flask, SQLAlchemy, Flask-Migrate, Flask-JWT-Extended
-- **前端**: Vue 3, Vite, Vue Router, Axios
+- **高性能计算核心**: Rust, PyO3, Maturin
+- **前端**: Vue 3, Vite, Vue Router, Axios, Vue I18n
 - **数据库**: SQLite (默认), 可配置为 PostgreSQL/MySQL
 
 ## 注意事项
