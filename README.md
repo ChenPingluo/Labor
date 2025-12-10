@@ -12,7 +12,11 @@
 
 ### 1. 后端环境配置 (Backend & Rust Core)
 
-确保你已经安装了 Python 3.8+ 和 Rust 工具链 (Cargo)。
+**注意**：本项目使用了 Rust 编写高性能计算模块。
+- **运行原理**：Rust 代码会被编译为 Python 的扩展模块（`.pyd` 或 `.so`），直接在 Python 进程中加载运行，**无需**单独启动 Rust 服务或进程。
+- **编译要求**：首次安装时，系统必须安装 Rust 编译器 (Cargo)。
+
+确保你已经安装了 Python 3.8+ 和 [Rust 工具链](https://rustup.rs/)。
 
 ```bash
 # 1. 进入后端目录
@@ -26,16 +30,17 @@ python -m venv venv
 # Linux/Mac 激活虚拟环境
 source venv/bin/activate
 
-# 3. 安装依赖 (包含 maturin)
+# 3. 安装依赖 (已包含 maturin 构建工具)
 pip install -r requirements.txt
 
 # 4. 编译并安装 Rust 核心模块
-# 注意：必须在激活虚拟环境的状态下执行
+# 这一步会将 Rust 代码编译并安装到当前的 Python 虚拟环境中
 cd ../labor_core
 maturin develop
 cd ../backend
 
 # 5. 数据库迁移
+
 # 初始化数据库表结构
 flask db upgrade
 
